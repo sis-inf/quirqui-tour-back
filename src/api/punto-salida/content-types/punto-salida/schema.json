@@ -12,22 +12,14 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Ubicacion": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "id_empresas": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::empresa.empresa",
       "mappedBy": "idEMPRESA"
+    },
+    "Ubicacion": {
+      "type": "string"
     }
   }
 }

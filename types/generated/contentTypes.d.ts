@@ -762,11 +762,8 @@ export interface ApiPuntoSalidaPuntoSalida extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    Ubicacion: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
     id_empresas: Schema.Attribute.Relation<'oneToMany', 'api::empresa.empresa'>;
+    Ubicacion: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
