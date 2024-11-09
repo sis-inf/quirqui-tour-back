@@ -31,12 +31,6 @@
             "relation": "oneToMany",
             "target": "api::bus.bus",
             "mappedBy": "empresa"
-        },
-        "expe": {
-            "type": "relation",
-            "relation": "oneToOne",
-            "target": "api::expe.expe",
-            "mappedBy": "empresa"
         }
     }
 }

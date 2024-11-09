@@ -673,7 +673,6 @@ export interface ApiEmpresaEmpresa extends Struct.CollectionTypeSchema {
       'api::punto-salida.punto-salida'
     >;
     idEmpresa: Schema.Attribute.Relation<'oneToMany', 'api::bus.bus'>;
-    expe: Schema.Attribute.Relation<'oneToOne', 'api::expe.expe'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -686,32 +685,6 @@ export interface ApiEmpresaEmpresa extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::empresa.empresa'
     > &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiExpeExpe extends Struct.CollectionTypeSchema {
-  collectionName: 'expes';
-  info: {
-    singularName: 'expe';
-    pluralName: 'expes';
-    displayName: 'expe';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    ubicacion: Schema.Attribute.String;
-    empresa: Schema.Attribute.Relation<'oneToOne', 'api::empresa.empresa'>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::expe.expe'> &
       Schema.Attribute.Private;
   };
 }
@@ -1233,7 +1206,6 @@ declare module '@strapi/strapi' {
       'api::conjunto.conjunto': ApiConjuntoConjunto;
       'api::danza.danza': ApiDanzaDanza;
       'api::empresa.empresa': ApiEmpresaEmpresa;
-      'api::expe.expe': ApiExpeExpe;
       'api::foto.foto': ApiFotoFoto;
       'api::fotos-conjunto.fotos-conjunto': ApiFotosConjuntoFotosConjunto;
       'api::punto-salida.punto-salida': ApiPuntoSalidaPuntoSalida;
