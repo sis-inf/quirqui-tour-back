@@ -19,13 +19,13 @@
       "type": "decimal"
     },
     "horarioSalida": {
-      "type": "datetime"
+      "type": "time"
     },
-    "empresa": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::empresa.empresa",
-      "inversedBy": "idEmpresa"
+    "Destino": {
+      "type": "text"
+    },
+    "ID_empresa": {
+      "type": "integer"
     }
   }
 }

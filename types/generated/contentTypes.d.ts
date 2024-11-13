@@ -509,8 +509,9 @@ export interface ApiBusBus extends Struct.CollectionTypeSchema {
   attributes: {
     tipo: Schema.Attribute.String;
     costoPasaje: Schema.Attribute.Decimal;
-    horarioSalida: Schema.Attribute.DateTime;
-    empresa: Schema.Attribute.Relation<'manyToOne', 'api::empresa.empresa'>;
+    horarioSalida: Schema.Attribute.Time;
+    Destino: Schema.Attribute.Text;
+    ID_empresa: Schema.Attribute.Integer;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -672,7 +673,6 @@ export interface ApiEmpresaEmpresa extends Struct.CollectionTypeSchema {
       'manyToOne',
       'api::punto-salida.punto-salida'
     >;
-    idEmpresa: Schema.Attribute.Relation<'oneToMany', 'api::bus.bus'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -813,6 +813,47 @@ export interface ApiTurismoTurismo extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::turismo.turismo'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
+  collectionName: 'usuarios';
+  info: {
+    singularName: 'usuario';
+    pluralName: 'usuarios';
+    displayName: 'usuario';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    rol: Schema.Attribute.Enumeration<['administrador']>;
+    nombre: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    apellidos: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    email: Schema.Attribute.Email &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    contacto: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::usuario.usuario'
     > &
       Schema.Attribute.Private;
   };
@@ -1210,6 +1251,7 @@ declare module '@strapi/strapi' {
       'api::fotos-conjunto.fotos-conjunto': ApiFotosConjuntoFotosConjunto;
       'api::punto-salida.punto-salida': ApiPuntoSalidaPuntoSalida;
       'api::turismo.turismo': ApiTurismoTurismo;
+      'api::usuario.usuario': ApiUsuarioUsuario;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;
