@@ -4,22 +4,21 @@
   "info": {
     "singularName": "punto-salida",
     "pluralName": "punto-salidas",
-    "displayName": "PuntoSalida",
-    "description": ""
+    "displayName": "PuntoSalida"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "id_empresas": {
+    "ubicacion": {
+      "type": "string"
+    },
+    "empresas": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::empresa.empresa",
-      "mappedBy": "idEMPRESA"
-    },
-    "Ubicacion": {
-      "type": "string"
+      "mappedBy": "punto_salida"
     }
   }
 }

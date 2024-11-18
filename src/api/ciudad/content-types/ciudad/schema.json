@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "idCiudad": {
-      "type": "string"
-    },
     "nombre": {
       "type": "string"
     },
@@ -26,6 +23,12 @@
       "relation": "oneToOne",
       "target": "api::foto.foto",
       "inversedBy": "ciudad"
+    },
+    "empresas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::empresa.empresa",
+      "mappedBy": "ciudad"
     }
   }
 }

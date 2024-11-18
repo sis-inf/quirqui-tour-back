@@ -500,18 +500,16 @@ export interface ApiBusBus extends Struct.CollectionTypeSchema {
   info: {
     singularName: 'bus';
     pluralName: 'buses';
-    displayName: 'Buses';
-    description: '';
+    displayName: 'Bus';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    tipo: Schema.Attribute.String;
-    costoPasaje: Schema.Attribute.Decimal;
-    horarioSalida: Schema.Attribute.Time;
-    Destino: Schema.Attribute.Text;
-    ID_empresa: Schema.Attribute.Integer;
+    destino: Schema.Attribute.String;
+    costopasaje: Schema.Attribute.Integer;
+    empresa: Schema.Attribute.Relation<'manyToOne', 'api::empresa.empresa'>;
+    horarios: Schema.Attribute.Relation<'oneToMany', 'api::horario.horario'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -521,38 +519,6 @@ export interface ApiBusBus extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::bus.bus'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiCarnavalCarnaval extends Struct.CollectionTypeSchema {
-  collectionName: 'carnavals';
-  info: {
-    singularName: 'carnaval';
-    pluralName: 'carnavals';
-    displayName: 'carnaval';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    historia: Schema.Attribute.Text;
-    cronograma: Schema.Attribute.Text;
-    danzas: Schema.Attribute.Relation<'oneToMany', 'api::danza.danza'>;
-    listaConjuntos: Schema.Attribute.Text;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::carnaval.carnaval'
-    > &
       Schema.Attribute.Private;
   };
 }
@@ -569,10 +535,10 @@ export interface ApiCiudadCiudad extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    idCiudad: Schema.Attribute.String;
     nombre: Schema.Attribute.String;
     historia: Schema.Attribute.Text;
     foto: Schema.Attribute.Relation<'oneToOne', 'api::foto.foto'>;
+    empresas: Schema.Attribute.Relation<'oneToMany', 'api::empresa.empresa'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -640,7 +606,6 @@ export interface ApiDanzaDanza extends Struct.CollectionTypeSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
-    carnaval: Schema.Attribute.Relation<'manyToOne', 'api::carnaval.carnaval'>;
     conjuntos: Schema.Attribute.Relation<'oneToMany', 'api::conjunto.conjunto'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -660,7 +625,8 @@ export interface ApiEmpresaEmpresa extends Struct.CollectionTypeSchema {
   info: {
     singularName: 'empresa';
     pluralName: 'empresas';
-    displayName: 'empresa';
+    displayName: 'Empresa';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -668,11 +634,12 @@ export interface ApiEmpresaEmpresa extends Struct.CollectionTypeSchema {
   attributes: {
     nombre: Schema.Attribute.String;
     contacto: Schema.Attribute.String;
-    destino: Schema.Attribute.String;
-    idEMPRESA: Schema.Attribute.Relation<
+    punto_salida: Schema.Attribute.Relation<
       'manyToOne',
       'api::punto-salida.punto-salida'
     >;
+    buses: Schema.Attribute.Relation<'oneToMany', 'api::bus.bus'>;
+    ciudad: Schema.Attribute.Relation<'manyToOne', 'api::ciudad.ciudad'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -750,20 +717,48 @@ export interface ApiFotosConjuntoFotosConjunto
   };
 }
 
+export interface ApiHorarioHorario extends Struct.CollectionTypeSchema {
+  collectionName: 'horarios';
+  info: {
+    singularName: 'horario';
+    pluralName: 'horarios';
+    displayName: 'Horario';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    horarioSalida: Schema.Attribute.Time;
+    bus: Schema.Attribute.Relation<'manyToOne', 'api::bus.bus'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::horario.horario'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPuntoSalidaPuntoSalida extends Struct.CollectionTypeSchema {
   collectionName: 'punto_salidas';
   info: {
     singularName: 'punto-salida';
     pluralName: 'punto-salidas';
     displayName: 'PuntoSalida';
-    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    id_empresas: Schema.Attribute.Relation<'oneToMany', 'api::empresa.empresa'>;
-    Ubicacion: Schema.Attribute.String;
+    ubicacion: Schema.Attribute.String;
+    empresas: Schema.Attribute.Relation<'oneToMany', 'api::empresa.empresa'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -813,47 +808,6 @@ export interface ApiTurismoTurismo extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::turismo.turismo'
-    > &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
-  collectionName: 'usuarios';
-  info: {
-    singularName: 'usuario';
-    pluralName: 'usuarios';
-    displayName: 'usuario';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    rol: Schema.Attribute.Enumeration<['administrador']>;
-    nombre: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    apellidos: Schema.Attribute.Text &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    email: Schema.Attribute.Email &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    contacto: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::usuario.usuario'
     > &
       Schema.Attribute.Private;
   };
@@ -1242,16 +1196,15 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::bus.bus': ApiBusBus;
-      'api::carnaval.carnaval': ApiCarnavalCarnaval;
       'api::ciudad.ciudad': ApiCiudadCiudad;
       'api::conjunto.conjunto': ApiConjuntoConjunto;
       'api::danza.danza': ApiDanzaDanza;
       'api::empresa.empresa': ApiEmpresaEmpresa;
       'api::foto.foto': ApiFotoFoto;
       'api::fotos-conjunto.fotos-conjunto': ApiFotosConjuntoFotosConjunto;
+      'api::horario.horario': ApiHorarioHorario;
       'api::punto-salida.punto-salida': ApiPuntoSalidaPuntoSalida;
       'api::turismo.turismo': ApiTurismoTurismo;
-      'api::usuario.usuario': ApiUsuarioUsuario;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

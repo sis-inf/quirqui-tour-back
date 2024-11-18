@@ -27,12 +27,6 @@
             "type": "media",
             "multiple": true
         },
-        "carnaval": {
-            "type": "relation",
-            "relation": "manyToOne",
-            "target": "api::carnaval.carnaval",
-            "inversedBy": "danzas"
-        },
         "conjuntos": {
             "type": "relation",
             "relation": "oneToMany",
