@@ -14,11 +14,11 @@
     "horarioSalida": {
       "type": "time"
     },
-    "bus": {
+    "buses": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::bus.bus",
-      "inversedBy": "horarios"
+      "mappedBy": "horarios"
     }
   }
 }

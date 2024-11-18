@@ -510,7 +510,7 @@ export interface ApiBusBus extends Struct.CollectionTypeSchema {
     destino: Schema.Attribute.String;
     costopasaje: Schema.Attribute.Integer;
     empresas: Schema.Attribute.Relation<'manyToMany', 'api::empresa.empresa'>;
-    horarios: Schema.Attribute.Relation<'oneToMany', 'api::horario.horario'>;
+    horarios: Schema.Attribute.Relation<'manyToMany', 'api::horario.horario'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -730,7 +730,7 @@ export interface ApiHorarioHorario extends Struct.CollectionTypeSchema {
   };
   attributes: {
     horarioSalida: Schema.Attribute.Time;
-    bus: Schema.Attribute.Relation<'manyToOne', 'api::bus.bus'>;
+    buses: Schema.Attribute.Relation<'manyToMany', 'api::bus.bus'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
