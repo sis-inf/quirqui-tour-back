@@ -501,12 +501,13 @@ export interface ApiBusBus extends Struct.CollectionTypeSchema {
     singularName: 'bus';
     pluralName: 'buses';
     displayName: 'Bus';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    destino: Schema.Attribute.String;
+    destino: Schema.Attribute.String & Schema.Attribute.Unique;
     costopasaje: Schema.Attribute.Integer;
     empresa: Schema.Attribute.Relation<'manyToOne', 'api::empresa.empresa'>;
     horarios: Schema.Attribute.Relation<'oneToMany', 'api::horario.horario'>;

@@ -4,7 +4,8 @@
     "info": {
         "singularName": "bus",
         "pluralName": "buses",
-        "displayName": "Bus"
+        "displayName": "Bus",
+        "description": ""
     },
     "options": {
         "draftAndPublish": true
@@ -12,7 +13,8 @@
     "pluginOptions": {},
     "attributes": {
         "destino": {
-            "type": "string"
+            "type": "string",
+            "unique": true
         },
         "costopasaje": {
             "type": "integer"
