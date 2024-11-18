@@ -24,17 +24,17 @@
             "target": "api::punto-salida.punto-salida",
             "inversedBy": "empresas"
         },
-        "buses": {
-            "type": "relation",
-            "relation": "oneToMany",
-            "target": "api::bus.bus",
-            "mappedBy": "empresa"
-        },
         "ciudad": {
             "type": "relation",
             "relation": "manyToOne",
             "target": "api::ciudad.ciudad",
             "inversedBy": "empresas"
+        },
+        "buses": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::bus.bus",
+            "mappedBy": "empresas"
         }
     }
 }

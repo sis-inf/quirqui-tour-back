@@ -507,9 +507,9 @@ export interface ApiBusBus extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    destino: Schema.Attribute.String & Schema.Attribute.Unique;
+    destino: Schema.Attribute.String;
     costopasaje: Schema.Attribute.Integer;
-    empresa: Schema.Attribute.Relation<'manyToOne', 'api::empresa.empresa'>;
+    empresas: Schema.Attribute.Relation<'manyToMany', 'api::empresa.empresa'>;
     horarios: Schema.Attribute.Relation<'oneToMany', 'api::horario.horario'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -639,8 +639,8 @@ export interface ApiEmpresaEmpresa extends Struct.CollectionTypeSchema {
       'manyToOne',
       'api::punto-salida.punto-salida'
     >;
-    buses: Schema.Attribute.Relation<'oneToMany', 'api::bus.bus'>;
     ciudad: Schema.Attribute.Relation<'manyToOne', 'api::ciudad.ciudad'>;
+    buses: Schema.Attribute.Relation<'manyToMany', 'api::bus.bus'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

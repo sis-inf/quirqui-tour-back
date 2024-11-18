@@ -13,15 +13,14 @@
   "pluginOptions": {},
   "attributes": {
     "destino": {
-      "type": "string",
-      "unique": true
+      "type": "string"
     },
     "costopasaje": {
       "type": "integer"
     },
-    "empresa": {
+    "empresas": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::empresa.empresa",
       "inversedBy": "buses"
     },
