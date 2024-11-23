@@ -524,6 +524,37 @@ export interface ApiBusBus extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCategoriaTurismoCategoriaTurismo
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'categoria_turismos';
+  info: {
+    singularName: 'categoria-turismo';
+    pluralName: 'categoria-turismos';
+    displayName: 'CategoriaTurismo';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Categoria: Schema.Attribute.String;
+    turismos: Schema.Attribute.Relation<'manyToMany', 'api::turismo.turismo'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::categoria-turismo.categoria-turismo'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCiudadCiudad extends Struct.CollectionTypeSchema {
   collectionName: 'ciudads';
   info: {
@@ -789,15 +820,15 @@ export interface ApiTurismoTurismo extends Struct.CollectionTypeSchema {
   };
   attributes: {
     nombre: Schema.Attribute.String;
-    tipo: Schema.Attribute.String;
     descripcion: Schema.Attribute.Text;
     horario_de_apertura: Schema.Attribute.String;
     horario_de_cierre: Schema.Attribute.String;
     Ubicacion: Schema.Attribute.String;
     costo: Schema.Attribute.Decimal;
-    evento_importante: Schema.Attribute.String;
-    ciudad: Schema.Attribute.Relation<'oneToOne', 'api::ciudad.ciudad'>;
-    foto: Schema.Attribute.Relation<'oneToOne', 'api::foto.foto'>;
+    categoria_turismos: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::categoria-turismo.categoria-turismo'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1197,6 +1228,7 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::bus.bus': ApiBusBus;
+      'api::categoria-turismo.categoria-turismo': ApiCategoriaTurismoCategoriaTurismo;
       'api::ciudad.ciudad': ApiCiudadCiudad;
       'api::conjunto.conjunto': ApiConjuntoConjunto;
       'api::danza.danza': ApiDanzaDanza;

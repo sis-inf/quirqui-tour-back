@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categoria_turismos",
+  "info": {
+    "singularName": "categoria-turismo",
+    "pluralName": "categoria-turismos",
+    "displayName": "CategoriaTurismo",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Categoria": {
+      "type": "string"
+    },
+    "turismos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::turismo.turismo",
+      "inversedBy": "categoria_turismos"
+    }
+  }
+}

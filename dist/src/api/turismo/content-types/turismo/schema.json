@@ -15,9 +15,6 @@
         "nombre": {
             "type": "string"
         },
-        "tipo": {
-            "type": "string"
-        },
         "descripcion": {
             "type": "text"
         },
@@ -33,18 +30,11 @@
         "costo": {
             "type": "decimal"
         },
-        "evento_importante": {
-            "type": "string"
-        },
-        "ciudad": {
+        "categoria_turismos": {
             "type": "relation",
-            "relation": "oneToOne",
-            "target": "api::ciudad.ciudad"
-        },
-        "foto": {
-            "type": "relation",
-            "relation": "oneToOne",
-            "target": "api::foto.foto"
+            "relation": "manyToMany",
+            "target": "api::categoria-turismo.categoria-turismo",
+            "mappedBy": "turismos"
         }
     }
 }
