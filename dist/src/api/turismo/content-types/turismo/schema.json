@@ -27,7 +27,7 @@
         "Ubicacion": {
             "type": "string"
         },
-        "costo": {
+        "costoAdulto": {
             "type": "decimal"
         },
         "categoria_turismos": {
@@ -35,6 +35,12 @@
             "relation": "manyToMany",
             "target": "api::categoria-turismo.categoria-turismo",
             "mappedBy": "turismos"
+        },
+        "costoNino": {
+            "type": "decimal"
+        },
+        "CostoExtranjero": {
+            "type": "decimal"
         }
     }
 }
