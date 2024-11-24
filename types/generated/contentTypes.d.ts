@@ -824,11 +824,13 @@ export interface ApiTurismoTurismo extends Struct.CollectionTypeSchema {
     horario_de_apertura: Schema.Attribute.String;
     horario_de_cierre: Schema.Attribute.String;
     Ubicacion: Schema.Attribute.String;
-    costo: Schema.Attribute.Decimal;
+    tarifa_adulto: Schema.Attribute.Decimal;
     categoria_turismos: Schema.Attribute.Relation<
       'manyToMany',
       'api::categoria-turismo.categoria-turismo'
     >;
+    tarifa_nino: Schema.Attribute.Decimal;
+    tarifa_extra: Schema.Attribute.Decimal;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

@@ -27,7 +27,7 @@
         "Ubicacion": {
             "type": "string"
         },
-        "costo": {
+        "tarifa_adulto": {
             "type": "decimal"
         },
         "categoria_turismos": {
@@ -35,6 +35,12 @@
             "relation": "manyToMany",
             "target": "api::categoria-turismo.categoria-turismo",
             "mappedBy": "turismos"
+        },
+        "tarifa_nino": {
+            "type": "decimal"
+        },
+        "tarifa_extra": {
+            "type": "decimal"
         }
     }
 }
