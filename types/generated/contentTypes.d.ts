@@ -587,58 +587,24 @@ export interface ApiCiudadCiudad extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiConjuntoConjunto extends Struct.CollectionTypeSchema {
-  collectionName: 'conjuntos';
-  info: {
-    singularName: 'conjunto';
-    pluralName: 'conjuntos';
-    displayName: 'conjunto';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    nombre: Schema.Attribute.String;
-    descripcion: Schema.Attribute.Text;
-    danza: Schema.Attribute.Relation<'manyToOne', 'api::danza.danza'>;
-    fotos_conjuntos: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::fotos-conjunto.fotos-conjunto'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::conjunto.conjunto'
-    > &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiDanzaDanza extends Struct.CollectionTypeSchema {
   collectionName: 'danzas';
   info: {
     singularName: 'danza';
     pluralName: 'danzas';
     displayName: 'danza';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    tipo: Schema.Attribute.String;
+    nombre: Schema.Attribute.String;
     historia: Schema.Attribute.Text;
     fotos: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
-    conjuntos: Schema.Attribute.Relation<'oneToMany', 'api::conjunto.conjunto'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -712,39 +678,6 @@ export interface ApiFotoFoto extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::foto.foto'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiFotosConjuntoFotosConjunto
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'fotos_conjuntos';
-  info: {
-    singularName: 'fotos-conjunto';
-    pluralName: 'fotos-conjuntos';
-    displayName: 'fotosConjunto';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    foto: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
-    conjunto: Schema.Attribute.Relation<'manyToOne', 'api::conjunto.conjunto'>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::fotos-conjunto.fotos-conjunto'
-    > &
       Schema.Attribute.Private;
   };
 }
@@ -1232,11 +1165,9 @@ declare module '@strapi/strapi' {
       'api::bus.bus': ApiBusBus;
       'api::categoria-turismo.categoria-turismo': ApiCategoriaTurismoCategoriaTurismo;
       'api::ciudad.ciudad': ApiCiudadCiudad;
-      'api::conjunto.conjunto': ApiConjuntoConjunto;
       'api::danza.danza': ApiDanzaDanza;
       'api::empresa.empresa': ApiEmpresaEmpresa;
       'api::foto.foto': ApiFotoFoto;
-      'api::fotos-conjunto.fotos-conjunto': ApiFotosConjuntoFotosConjunto;
       'api::horario.horario': ApiHorarioHorario;
       'api::punto-salida.punto-salida': ApiPuntoSalidaPuntoSalida;
       'api::turismo.turismo': ApiTurismoTurismo;

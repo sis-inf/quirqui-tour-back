@@ -4,34 +4,30 @@
     "info": {
         "singularName": "danza",
         "pluralName": "danzas",
-        "displayName": "danza"
+        "displayName": "danza",
+        "description": ""
     },
     "options": {
         "draftAndPublish": true
     },
     "pluginOptions": {},
     "attributes": {
-        "tipo": {
+        "nombre": {
             "type": "string"
         },
         "historia": {
             "type": "text"
         },
         "fotos": {
+            "type": "media",
+            "multiple": true,
+            "required": false,
             "allowedTypes": [
                 "images",
                 "files",
                 "videos",
                 "audios"
-            ],
-            "type": "media",
-            "multiple": true
-        },
-        "conjuntos": {
-            "type": "relation",
-            "relation": "oneToMany",
-            "target": "api::conjunto.conjunto",
-            "mappedBy": "danza"
+            ]
         }
     }
 }
